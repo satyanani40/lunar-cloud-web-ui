@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="col-md-3" wb-affix="150">
+<div class="thumbnail">
+                <img class="img-rounded" src="http://bootflat.github.io/img/thumbnail-1.jpg">
+                <div class="caption text-center">
+                  <h3>Thumbnail label</h3>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id ...</p>
+                </div>
+              </div>
+            <ul class="list-group">
+              <li class="list-group-item"><span class="badge">14</span>Cras justo odio</li>
+              <li class="list-group-item"><span class="badge badge-default">91</span>Dapibus ac facilisis in</li>
+              <li class="list-group-item"><span class="badge badge-primary">38</span>Morbi leo risus</li>
+              <li class="list-group-item"><span class="badge badge-success">56</span>Porta ac consectetur ac</li>
+              <li class="list-group-item"><span class="badge badge-warning">20</span>Vestibulum at eros</li>
+              <li class="list-group-item"><span class="badge badge-danger">99+</span>Dapibus ac facilisis in</li>
+            </ul>
+        
+    </div>
+    <div class="col-md-9" style="min-height:2000px">
+        <div class="well clearfix">
+        <div popover="{{user.name.first}} {{user.name.last}}" popover-trigger="mouseenter" ng-repeat="user in users" style="float:left;margin:10px;cursor:pointer">
+            <img src="{{user.picture}}" />
+          {{user.name.first}} {{user.name.last}}
+        </div>
+        </div>
+          
+        
+        <div class="jumbotron">
+              <div class="jumbotron-photo"><img src="http://bootflat.github.io/img/Jumbotron.jpg"></div>
+              <div class="jumbotron-contents">
+                <h1>Implementing the HTML and CSS into your user interface project</h1>
+                <h2>HTML Structure</h2>
+                <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                <h2>CSS Structure</h2>
+                <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+              </div>
+            </div>
+        
+    </div>
+</div>
