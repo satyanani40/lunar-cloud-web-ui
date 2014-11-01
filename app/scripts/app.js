@@ -18,19 +18,55 @@ angular
     'ngTouch',
     'ui.bootstrap'
   ])
+  .run(["$rootScope", "$location", function ($rootScope, $location) {
+
+    $rootScope.$on("$routeChangeSuccess", function (userInfo) {
+        console.log(userInfo);
+    });
+
+    $rootScope.$on("$routeChangeError", function (event, current, previous, eventObj) {
+        if (eventObj.authenticated === false) {
+            $location.path("/login");
+        }
+    });
+}])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+        resolve: {
+            auth: function ($q, authsvc) {
+                var userInfo = authsvc.getUserInfo();
+                if (userInfo) {
+                    return $q.when(userInfo);
+                } else {
+                    return $q.reject({ authenticated: false });
+                }
+            }
+        }
+      })
+      .when('/userProfile', {
+        templateUrl: 'views/userprofile.html',
+        controller: 'UserprofileCtrl',
+        resolve: {
+            auth: function ($q, authsvc) {
+                var userInfo = authsvc.getUserInfo();
+                if (userInfo) {
+                    return $q.when(userInfo);
+                } else {
+                    return $q.reject({ authenticated: false });
+                }
+            }
+        }
+      })
+      .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
-      })
-      .when('/userProfile', {
-        templateUrl: 'views/userprofile.html',
-        controller: 'UserprofileCtrl'
       })
       .otherwise({
         redirectTo: '/'

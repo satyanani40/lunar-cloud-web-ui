@@ -12,7 +12,7 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="bower_components/Bootflat/bootflat/css/bootflat.css" />
+    <link rel="stylesheet" href="../bower_components/Bootflat/bootflat/css/bootflat.css" />
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
@@ -21,7 +21,7 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -33,14 +33,18 @@
           <a class="navbar-brand" href="#">Weber</a>
         </div>
         <div class="navbar-collapse collapse">
-        <div class="col-sm-6 col-md-6">
+        <div class="col-sm-6 col-md-6" ng-controller="InstantsearchCtrl">
 					    	<form class="navbar-form" role="search" method="get" id="search-form" name="search-form">
 					        	
 						        <div class="input-group col-md-12">
-						            <input type="text" class="form-control" id="query" name="query" value="">
-							            <div class="input-group-btn">
-						            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-						            </div>
+						            <input ng-model="searchString" placeholder="Enter your search terms" type="text" class="form-control" >
+	<ul class="nav-search-resuts">
+		<li ng-repeat="i in items | searchFor:searchString  | limitTo:10">
+			<a href="{{i.url}}"><img ng-src="{{i.image}}" /></a>
+			<p>{{i.title}}</p>
+		</li>
+	</ul>
+							          
 						        </div>
 					        </form>
 				        </div>
@@ -48,6 +52,12 @@
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#/about">About</a></li>
             <li><a href="#/userProfile">Profile</a></li>
+ 
+    <div ng-if="userInfo">
+        {{userInfo.userName}}
+    <a ng-click="logout()" class="btn btn-link">Logout</a>
+    </div>
+
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -112,6 +122,10 @@
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/services/weberservice.js"></script>
         <script src="scripts/controllers/userprofile.js"></script>
+        <script src="scripts/controllers/instantsearch.js"></script>
+        <script src="scripts/filters/searchfor.js"></script>
+        <script src="scripts/services/authsvc.js"></script>
+        <script src="scripts/controllers/login.js"></script>
         <!-- endbuild -->
 </body>
 </html>
